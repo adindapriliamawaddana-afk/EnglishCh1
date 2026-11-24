@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Digital Literacies and My Identities | Bahasa Inggris Kelas XI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar & Smooth Transitions */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .tab-active {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+        .fade-in {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-800">
+
+    <!-- Top Sticky Header & Progress Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('overview')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-fingerprint text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 block">English Grade XI • Phase F</span>
+                        <h1 class="font-heading font-bold text-slate-900 text-sm sm:text-base leading-tight">Digital Literacies & My Identities</h1>
+                    </div>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex flex-col items-end">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-slate-600 mb-1">
+                            <span>Progres Belajar</span>
+                            <span id="progress-text" class="text-indigo-600 font-bold">0%</span>
+                        </div>
+                        <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-600 to-cyan-500 transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Progress Line -->
+        <div class="md:hidden w-full h-1 bg-slate-200">
+            <div id="mobile-progress-bar" class="h-full bg-indigo-600 transition-all duration-500" style="width: 0%"></div>
+        </div>
+    </header>
+
+    <!-- Main Layout Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar-nav" class="hidden lg:block w-full lg:w-72 shrink-0">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm sticky top-24 space-y-1.5">
+                <p class="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">Daftar Materi Bab 1</p>
+                
+                <button onclick="switchTab('overview')" data-tab="overview" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold transition tab-active">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-compass w-4 text-center"></i> Pengantar & Tujuan</span>
+                    <i class="fa-solid fa-circle-check text-xs opacity-0 check-icon" id="check-overview"></i>
+                </button>
+
+                <button onclick="switchTab('unit1')" data-tab="unit1" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-comments w-4 text-center"></i> 1. Expressing Opinions</span>
+                    <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-unit1"></i>
+                </button>
+
+                <button onclick="switchTab('unit2')" data-tab="unit2" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-handshake-angle w-4 text-center"></i> 2. Managing Conversations</span>
+                    <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-unit2"></i>
+                </button>
+
+                <button onclick="switchTab('unit3')" data-tab="unit3" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-spell-check w-4 text-center"></i> 3. Subject Questions</span>
+                    <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-unit3"></i>
+                </button>
+
+                <button onclick="switchTab('unit4')" data-tab="unit4" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-book-open-reader w-4 text-center"></i> 4. Footprint & Netiquette</span>
+                    <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-unit4"></i>
+                </button>
+
+                <button onclick="switchTab('unit5')" data-tab="unit5" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+                    <span class="flex items-center gap-3"><i class="fa-solid fa-pen-nib w-4 text-center"></i> 5. Caption & Bio Project</span>
+                    <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-unit5"></i>
+                </button>
+
+                <div class="pt-2 mt-2 border-t border-slate-100">
+                    <button onclick="switchTab('evaluation')" data-tab="evaluation" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-sm font-bold text-indigo-700 bg-indigo-50/70 hover:bg-indigo-100 transition">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-award w-4 text-center"></i> Evaluasi Akhir Bab</span>
+                        <i class="fa-solid fa-circle-check text-xs text-emerald-500 hidden check-icon" id="check-evaluation"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 min-w-0 space-y-6">
+
+            <!-- ========================================== -->
+            <!-- TAB 0: OVERVIEW & TUJUAN PEMBELAJARAN      -->
+            <!-- ========================================== -->
+            <section id="sec-overview" class="content-section fade-in space-y-6">
+                <!-- Hero Banner -->
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-800 to-cyan-800 text-white p-6 sm:p-10 shadow-xl">
+                    <div class="relative z-10 max-w-2xl space-y-4">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-semibold tracking-wide text-cyan-200 border border-white/20">
+                            <i class="fa-solid fa-graduation-cap"></i> Kurikulum Merdeka • Fase F (Kelas XI SMA)
+                        </span>
+                        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold leading-tight">
+                            Chapter 1: Digital Literacies and My Identities
+                        </h2>
+                        <p class="text-indigo-100 text-sm sm:text-base leading-relaxed">
+                            Selamat datang di modul pembelajaran interaktif Bahasa Inggris! Di era digital saat ini, setiap unggahan, komentar, dan profil media sosial membentuk <strong>identitas digital</strong> kita. Mari pelajari cara berkomunikasi secara cerdas, sopan, dan percaya diri dalam bahasa Inggris di ruang digital.
+                        </p>
+                        <div class="pt-2 flex flex-wrap gap-3">
+                            <button onclick="markComplete('overview'); switchTab('unit1')" class="px-5 py-3 rounded-xl bg-white text-indigo-900 font-bold text-sm shadow-md hover:bg-cyan-50 transition flex items-center gap-2">
+                                Mulai Belajar Materi 1 <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Decorative Icons -->
+                    <div class="hidden sm:block absolute right-8 bottom-6 opacity-15 text-9xl">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                </div>
+
+                <!-- Learning Objectives Card -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <i class="fa-solid fa-bullseye text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-lg sm:text-xl text-slate-900">A. Tujuan Pembelajaran (Learning Objectives)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Setelah mempelajari seluruh materi pada bab ini, peserta didik diharapkan mampu:</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                            <p class="text-sm text-slate-700">Menggunakan ungkapan untuk <strong>menyampaikan, mempertahankan, menyetujui, dan menyanggah pendapat</strong> dalam bahasa Inggris secara santun.</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                            <p class="text-sm text-slate-700"><strong>Memulai, melanjutkan, dan mengakhiri percakapan</strong> dalam berbagai situasi komunikasi (pertemanan, sekolah, dan media sosial).</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                            <p class="text-sm text-slate-700">Memahami dan menerapkan pola tata bahasa <strong>Subject Questions</strong> dengan tepat.</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                            <p class="text-sm text-slate-700">Memahami kosakata serta konsep kunci mengenai <strong>Digital Footprint</strong> (jejak digital) dan <strong>Netiquette</strong> (etika berinternet).</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+                            <p class="text-sm text-slate-700">Mengidentifikasi ide pokok dan informasi penting dalam <strong>teks bacaan</strong> bertema jejak digital dan etika komunikasi daring.</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">6</span>
+                            <p class="text-sm text-slate-700">Membuat dan mempresentasikan <strong>caption atau bio media sosial</strong> dalam bahasa Inggris yang mencerminkan identitas diri secara positif.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6-Stage Learning Flow Info -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-heading font-bold text-base sm:text-lg text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-route text-cyan-600"></i> Alur Belajar di Setiap Unit (6 Tahapan Aktif)
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+                        <div class="p-3 rounded-xl bg-amber-50 border border-amber-100">
+                            <i class="fa-solid fa-lightbulb text-amber-500 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">1. Let's Explore</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Situasi Pemantik</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-100">
+                            <i class="fa-solid fa-book-open text-indigo-600 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">2. Let's Learn</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Konsep & Ekspresi</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-cyan-50 border border-cyan-100">
+                            <i class="fa-solid fa-magnifying-glass text-cyan-600 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">3. Let's Observe</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Analisis Dialog/Teks</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
+                            <i class="fa-solid fa-pen-to-square text-emerald-600 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">4. Let's Practice</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Latihan Interaktif</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-purple-50 border border-purple-100">
+                            <i class="fa-solid fa-rocket text-purple-600 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">5. Let's Apply</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Praktik Kontekstual</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-rose-50 border border-rose-100">
+                            <i class="fa-solid fa-heart text-rose-500 text-xl mb-1.5"></i>
+                            <div class="font-bold text-xs text-slate-800">6. Let's Reflect</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Refleksi Diri</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UNIT 1: GIVING, DEFENDING, AGREEING, ETC.  -->
+            <!-- ========================================== -->
+            <section id="sec-unit1" class="content-section hidden fade-in space-y-6">
+                <!-- Unit Header -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm border-l-4 border-l-indigo-600">
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Materi 1 • Speaking & Critical Thinking</span>
+                    <h2 class="font-heading text-2xl font-extrabold text-slate-900 mt-1">Giving, Defending, Agreeing, and Disagreeing with Opinions</h2>
+                    <p class="text-sm text-slate-600 mt-1">Mempelajari cara mengemukakan gagasan, mempertahankan argumen dengan bukti, serta menyetujui atau menyanggah pendapat secara sopan di dunia nyata maupun media sosial.</p>
+                </div>
+
+                <!-- 1. LET'S EXPLORE -->
+                <div class="bg-amber-50/70 rounded-2xl border border-amber-200 p-6">
+                    <h3 class="font-heading font-bold text-amber-900 flex items-center gap-2 text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> 1. Let's Explore (Situasi Pemantik)
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-3">
+                        Bayangkan kamu melihat sebuah unggahan viral di Instagram atau TikTok dengan pernyataan: <em>"Teenagers under 17 shouldn't be allowed to have public social media accounts."</em> (Remaja di bawah 17 tahun seharusnya tidak diizinkan memiliki akun media sosial publik).
+                    </p>
+                    <div class="bg-white p-4 rounded-xl border border-amber-200/80 text-sm space-y-1.5">
+                        <p class="font-semibold text-slate-800">Pertanyaan Pemantik:</p>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>Apakah kamu setuju atau tidak setuju dengan pernyataan tersebut? Mengapa?</li>
+                            <li>Bagaimana cara menyampaikan ketidaksetujuan di kolom komentar tanpa memicu pertengkaran (<em>hate speech</em>)?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. LET'S LEARN -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <h3 class="font-heading font-bold text-indigo-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> 2. Let's Learn (Materi & Konsep Utama)
+                    </h3>
+
+                    <!-- 4 Functions Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100">
+                            <h4 class="font-bold text-indigo-900 text-base mb-1">a. Giving Opinions (Menyampaikan Pendapat)</h4>
+                            <p class="text-xs text-slate-600 mb-2">Digunakan untuk mengutarakan sudut pandang, perasaan, atau keyakinan pribadi mengenai suatu topik.</p>
+                            <div class="text-xs bg-white p-2.5 rounded-lg border border-indigo-100 space-y-1">
+                                <p><strong>Contoh:</strong> <em>"<strong>In my opinion</strong>, digital literacy is essential for students."</em></p>
+                                <p><strong>Contoh:</strong> <em>"<strong>From my point of view</strong>, sharing too much personal data is risky."</em></p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-cyan-50/60 border border-cyan-100">
+                            <h4 class="font-bold text-cyan-900 text-base mb-1">b. Defending Opinions (Mempertahankan Pendapat)</h4>
+                            <p class="text-xs text-slate-600 mb-2">Digunakan untuk memperkuat pendapat dengan memberikan alasan logis, fakta, atau bukti pendukung.</p>
+                            <div class="text-xs bg-white p-2.5 rounded-lg border border-cyan-100 space-y-1">
+                                <p><strong>Contoh:</strong> <em>"<strong>I believe this because</strong> cyberbullying can affect mental health."</em></p>
+                                <p><strong>Contoh:</strong> <em>"<strong>The reason is that</strong> recruiters check candidates' social media."</em></p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100">
+                            <h4 class="font-bold text-emerald-900 text-base mb-1">c. Agreeing with Opinions (Menyetujui Pendapat)</h4>
+                            <p class="text-xs text-slate-600 mb-2">Digunakan ketika kita memiliki pemikiran yang sejalan dengan lawan bicara.</p>
+                            <div class="text-xs bg-white p-2.5 rounded-lg border border-emerald-100 space-y-1">
+                                <p><strong>Contoh:</strong> <em>"<strong>I couldn't agree more.</strong> Privacy settings are super important."</em></p>
+                                <p><strong>Contoh:</strong> <em>"<strong>That's a good point.</strong> We must think before posting."</em></p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-rose-50/60 border border-rose-100">
+                            <h4 class="font-bold text-rose-900 text-base mb-1">d. Disagreeing Politely (Menyanggah Secara Sopan)</h4>
+                            <p class="text-xs text-slate-600 mb-2">Digunakan untuk menolak atau berbeda pendapat tanpa menyinggung perasaan orang lain.</p>
+                            <div class="text-xs bg-white p-2.5 rounded-lg border border-rose-100 space-y-1">
+                                <p><strong>Contoh:</strong> <em>"<strong>I see your point, but</strong> social media also helps us learn new skills."</em></p>
+                                <p><strong>Contoh:</strong> <em>"<strong>I respectfully disagree</strong> because not all online content is harmful."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formal vs Informal Box -->
+                    <div class="p-4 rounded-xl bg-slate-800 text-white text-sm">
+                        <h4 class="font-bold text-amber-300 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> Formal vs. Informal Context (Penggunaan Berdasarkan Situasi)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                            <div class="bg-slate-700/70 p-3 rounded-lg">
+                                <span class="font-bold text-cyan-300 block mb-1">Situasi Formal (Diskusi Kelas, Debat, Esai, Presentasi):</span>
+                                Gunakan ungkapan yang lengkap dan terstruktur seperti <em>"From my perspective..."</em>, <em>"I firmly believe that..."</em>, atau <em>"I respectfully disagree with that statement."</em>
+                            </div>
+                            <div class="bg-slate-700/70 p-3 rounded-lg">
+                                <span class="font-bold text-emerald-300 block mb-1">Situasi Informal (Obrolan Teman, Grup Chat, Komentar Santai):</span>
+                                Gunakan ungkapan yang lebih ringkas dan akrab seperti <em>"I reckon..."</em>, <em>"To be honest..."</em>, <em>"Totally!"</em>, atau <em>"I'm not so sure about that."</em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expressions Table -->
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm mb-2">Tabel Kumpulan Ekspresi & Terjemahan</h4>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                        <th class="p-3 font-bold">Fungsi</th>
+                                        <th class="p-3 font-bold">Ungkapan Bahasa Inggris</th>
+                                        <th class="p-3 font-bold">Arti Bahasa Indonesia</th>
+                                        <th class="p-3 font-bold">Situasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr>
+                                        <td class="p-3 font-semibold text-indigo-600" rowspan="3">Giving Opinions</td>
+                                        <td class="p-3">In my opinion, ... / I think ...</td>
+                                        <td class="p-3">Menurut pendapat saya, ... / Saya pikir ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-100 text-xs">Netral</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">From my point of view, ...</td>
+                                        <td class="p-3">Dari sudut pandang saya, ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 text-xs">Formal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">Honestly, I feel that ...</td>
+                                        <td class="p-3">Jujur, saya merasa bahwa ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 text-xs">Informal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-cyan-600" rowspan="2">Defending Opinions</td>
+                                        <td class="p-3">I strongly believe this because ...</td>
+                                        <td class="p-3">Saya sangat meyakini hal ini karena ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 text-xs">Formal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">The main reason is that ... / Based on facts, ...</td>
+                                        <td class="p-3">Alasan utamanya adalah ... / Berdasarkan fakta, ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-100 text-xs">Netral</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-emerald-600" rowspan="2">Agreeing</td>
+                                        <td class="p-3">I agree with you. / That's a valid point.</td>
+                                        <td class="p-3">Saya setuju denganmu. / Itu poin yang tepat.</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-100 text-xs">Netral</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">Exactly! / You took the words right out of my mouth.</td>
+                                        <td class="p-3">Tepat sekali! / Kamu mengungkapkan apa yang ada di pikiranku.</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 text-xs">Informal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-rose-600" rowspan="2">Disagreeing</td>
+                                        <td class="p-3">I see your point, but I have a different opinion.</td>
+                                        <td class="p-3">Saya mengerti maksudmu, tapi saya punya pendapat berbeda.</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-100 text-xs">Netral</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">I respectfully disagree because ...</td>
+                                        <td class="p-3">Dengan segala hormat saya tidak setuju karena ...</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 text-xs">Formal</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. LET'S OBSERVE -->
+                <div class="bg-cyan-50/60 rounded-2xl border border-cyan-200 p-6 space-y-4">
+                    <h3 class="font-heading font-bold text-cyan-950 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-600"></i> 3. Let's Observe (Mengamati Percakapan)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600">Perhatikan percakapan antara <strong>Raka, Nabila, dan Dimas</strong> di perpustakaan sekolah mengenai kebiasaan mengunggah aktivitas harian ke media sosial:</p>
+                    
+                    <div class="bg-white rounded-xl p-4 sm:p-5 border border-cyan-100 space-y-3 text-sm shadow-sm">
+                        <div class="flex gap-3">
+                            <span class="font-bold text-indigo-600 w-16 shrink-0">Raka:</span>
+                            <p class="text-slate-700">"Guys, <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-medium">in my opinion</span>, sharing our daily routine on Instagram Stories is fun and helps us stay connected with friends."</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-bold text-rose-600 w-16 shrink-0">Nabila:</span>
+                            <p class="text-slate-700">"<span class="bg-rose-100 text-rose-900 px-1.5 py-0.5 rounded font-medium">I see your point, but</span> posting everything in real-time can be dangerous. It exposes our location to strangers."</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-bold text-emerald-600 w-16 shrink-0">Dimas:</span>
+                            <p class="text-slate-700">"<span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">That's a good point</span>, Nabila. <span class="bg-cyan-100 text-cyan-900 px-1.5 py-0.5 rounded font-medium">I strongly believe this because</span> oversharing weakens our online privacy."</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-bold text-indigo-600 w-16 shrink-0">Raka:</span>
+                            <p class="text-slate-700">"Hmm, <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium">I agree with you</span> both. Maybe we should set our accounts to private and think carefully before posting."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. LET'S PRACTICE -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <h3 class="font-heading font-bold text-emerald-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-pen-to-square text-emerald-600"></i> 4. Let's Practice (Latihan Interaktif)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600">Pilih ungkapan yang paling tepat untuk melengkapi dialog berikut!</p>
+
+                    <div id="u1-quiz-container" class="space-y-4"></div>
+                </div>
+
+                <!-- 5. LET'S APPLY -->
+                <div class="bg-purple-50/70 rounded-2xl border border-purple-200 p-6 space-y-3">
+                    <h3 class="font-heading font-bold text-purple-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-rocket text-purple-600"></i> 5. Let's Apply (Aktivitas Penerapan)
+                    </h3>
+                    <p class="text-sm text-slate-700">
+                        <strong>Tugas Berpasangan / Mandiri:</strong> Pilih salah satu pernyataan berikut dan tuliskan responsmu yang memuat <em>Giving Opinion</em> + <em>Defending Opinion</em> (alasan) dalam bahasa Inggris:
+                    </p>
+                    <div class="p-3.5 bg-white rounded-xl border border-purple-100 text-sm text-slate-800 italic">
+                        "Using filters on every photo creates fake digital identities among teenagers."
+                    </div>
+                    <textarea id="u1-apply-input" rows="3" placeholder="Contoh: I agree with this statement. I believe this because excessive use of filters makes teenagers lose confidence in their real appearance..." class="w-full p-3 rounded-xl border border-purple-200 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"></textarea>
+                    <div class="flex justify-between items-center">
+                        <button onclick="saveReflection('u1-apply')" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 transition">Simpan Jawaban Saya</button>
+                        <span id="u1-apply-status" class="text-xs font-semibold text-emerald-600 hidden"><i class="fa-solid fa-check"></i> Tersimpan!</span>
+                    </div>
+                </div>
+
+                <!-- 6. LET'S REFLECT & NEXT BUTTON -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-rose-700 text-sm flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> 6. Let's Reflect</h4>
+                        <p class="text-xs text-slate-600 mt-1">Sudahkah kamu mampu membedakan cara menyanggah pendapat secara sopan vs. kasar di kolom komentar media sosial?</p>
+                    </div>
+                    <button onclick="markComplete('unit1'); switchTab('unit2')" class="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition flex items-center gap-2">
+                        Selesai & Lanjut Materi 2 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UNIT 2: STARTING, CONTINUING, ENDING CONV. -->
+            <!-- ========================================== -->
+            <section id="sec-unit2" class="content-section hidden fade-in space-y-6">
+                <!-- Unit Header -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm border-l-4 border-l-cyan-600">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-600">Materi 2 • Interpersonal Communication</span>
+                    <h2 class="font-heading text-2xl font-extrabold text-slate-900 mt-1">Starting, Continuing, and Ending a Conversation</h2>
+                    <p class="text-sm text-slate-600 mt-1">Menguasai keterampilan membuka obrolan secara ramah, menjaga alur percakapan tetap hidup, serta menutup pembicaraan dengan sopan.</p>
+                </div>
+
+                <!-- 1. LET'S EXPLORE -->
+                <div class="bg-amber-50/70 rounded-2xl border border-amber-200 p-6">
+                    <h3 class="font-heading font-bold text-amber-900 flex items-center gap-2 text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> 1. Let's Explore
+                    </h3>
+                    <p class="text-sm text-slate-700">
+                        Pernahkah kamu mengirim DM (<em>Direct Message</em>) ke teman baru atau bertemu teman lama di sekolah, lalu obrolan tiba-tiba terhenti canggung setelah berkata <em>"Hi, how are you?"</em>? Keterampilan mengelola alur percakapan membuat komunikasi kita terasa hangat dan alami!
+                    </p>
+                </div>
+
+                <!-- 2. LET'S LEARN -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <h3 class="font-heading font-bold text-indigo-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> 2. Let's Learn (Tahapan Percakapan)
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-xl bg-sky-50 border border-sky-100">
+                            <span class="text-xs font-bold uppercase text-sky-600">Tahap 1</span>
+                            <h4 class="font-bold text-slate-900 text-base mt-0.5 mb-2">Starting a Conversation</h4>
+                            <p class="text-xs text-slate-600 mb-3">Membuka percakapan dengan sapaan, pujian ringan, atau pertanyaan mengenai topik yang sedang hangat.</p>
+                            <ul class="text-xs space-y-1.5 text-slate-700 bg-white p-3 rounded-lg border border-sky-100">
+                                <li>• <em>"Hi, how's it going?"</em></li>
+                                <li>• <em>"Have you seen the latest post on the school account?"</em></li>
+                                <li>• <em>"Excuse me, do you mind if I join you?"</em></li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+                            <span class="text-xs font-bold uppercase text-indigo-600">Tahap 2</span>
+                            <h4 class="font-bold text-slate-900 text-base mt-0.5 mb-2">Continuing a Conversation</h4>
+                            <p class="text-xs text-slate-600 mb-3">Menunjukkan ketertarikan (<em>active listening</em>) dan mengajukan pertanyaan lanjutan agar diskusi berlanjut.</p>
+                            <ul class="text-xs space-y-1.5 text-slate-700 bg-white p-3 rounded-lg border border-indigo-100">
+                                <li>• <em>"Really? Tell me more about it!"</em></li>
+                                <li>• <em>"That's super interesting! How did you do that?"</em></li>
+                                <li>• <em>"Speaking of digital safety, what do you think about...?"</em></li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-teal-50 border border-teal-100">
+                            <span class="text-xs font-bold uppercase text-teal-600">Tahap 3</span>
+                            <h4 class="font-bold text-slate-900 text-base mt-0.5 mb-2">Ending a Conversation</h4>
+                            <p class="text-xs text-slate-600 mb-3">Memberikan sinyal berhenti secara halus, menyampaikan alasan, dan mengucapkan salam perpisahan.</p>
+                            <ul class="text-xs space-y-1.5 text-slate-700 bg-white p-3 rounded-lg border border-teal-100">
+                                <li>• <em>"Well, I have to get back to class now."</em></li>
+                                <li>• <em>"It was really nice talking to you!"</em></li>
+                                <li>• <em>"Catch you later! Don't forget to DM me the link."</em></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Expressions Table -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                    <th class="p-3 font-bold">Tahapan</th>
+                                    <th class="p-3 font-bold">Ekspresi Bahasa Inggris</th>
+                                    <th class="p-3 font-bold">Terjemahan Indonesia</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-3 font-semibold text-sky-700">Starting</td>
+                                    <td class="p-3">Hey! Long time no see. How have you been?</td>
+                                    <td class="p-3">Hei! Lama tidak bertemu. Bagaimana kabarmu?</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-sky-700">Starting</td>
+                                    <td class="p-3">I really love your latest photography post!</td>
+                                    <td class="p-3">Aku sangat suka unggahan fotografimu yang terbaru!</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-indigo-700">Continuing</td>
+                                    <td class="p-3">No way! What happened next?</td>
+                                    <td class="p-3">Masa sih! Apa yang terjadi selanjutnya?</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-indigo-700">Continuing</td>
+                                    <td class="p-3">By the way, have you tried that new editing app?</td>
+                                    <td class="p-3">Ngomong-ngomong, sudah coba aplikasi edit baru itu?</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-teal-700">Ending</td>
+                                    <td class="p-3">I'm sorry to cut this short, but I need to finish my assignment.</td>
+                                    <td class="p-3">Maaf memotong obrolan ini, tapi aku harus menyelesaikan tugasku.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-teal-700">Ending</td>
+                                    <td class="p-3">Talk to you soon! Take care.</td>
+                                    <td class="p-3">Sampai ngobrol lagi segera! Jaga diri.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. LET'S OBSERVE (3 Context Dialogues) -->
+                <div class="bg-cyan-50/60 rounded-2xl border border-cyan-200 p-6 space-y-4">
+                    <h3 class="font-heading font-bold text-cyan-950 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-600"></i> 3. Let's Observe (3 Konteks Percakapan)
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs sm:text-sm">
+                        <!-- Context 1: School -->
+                        <div class="bg-white p-4 rounded-xl border border-cyan-100 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs inline-block">Konteks 1: Sekolah</span>
+                            <p><strong>Alya:</strong> "Hi, Bima! Have you checked the digital poster competition announcement?" <em>(Starting)</em></p>
+                            <p><strong>Bima:</strong> "Oh, really? I haven't seen it yet. What's the theme?" <em>(Continuing)</em></p>
+                            <p><strong>Alya:</strong> "It's about safe internet for teens. You should join!"</p>
+                            <p><strong>Bima:</strong> "Sounds cool! Well, the bell is ringing. See you at break time!" <em>(Ending)</em></p>
+                        </div>
+                        <!-- Context 2: Friendship -->
+                        <div class="bg-white p-4 rounded-xl border border-cyan-100 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs inline-block">Konteks 2: Pertemanan</span>
+                            <p><strong>Tara:</strong> "Hey Sinta, how was your weekend?" <em>(Starting)</em></p>
+                            <p><strong>Sinta:</strong> "It was great! I started a book review blog."</p>
+                            <p><strong>Tara:</strong> "That's awesome! Can you tell me more about what books you review?" <em>(Continuing)</em></p>
+                            <p><strong>Sinta:</strong> "Sure, I'll send you the link tonight. Gotta run now, bye!" <em>(Ending)</em></p>
+                        </div>
+                        <!-- Context 3: Social Media DM -->
+                        <div class="bg-white p-4 rounded-xl border border-cyan-100 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 font-bold text-xs inline-block">Konteks 3: Media Sosial (DM)</span>
+                            <p><strong>Fajar:</strong> "Hi! I saw your comment on the coding community page. Nice insight!" <em>(Starting)</em></p>
+                            <p><strong>Rina:</strong> "Thanks! Are you learning web development too?" <em>(Continuing)</em></p>
+                            <p><strong>Fajar:</strong> "Yes, I am! Let's share resources sometime. I have to log off now. Nice chatting with you!" <em>(Ending)</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. LET'S PRACTICE (Ordering & Fill in the blank) -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <h3 class="font-heading font-bold text-emerald-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-pen-to-square text-emerald-600"></i> 4. Let's Practice (Menyusun & Melengkapi Percakapan)
+                    </h3>
+                    <div id="u2-quiz-container" class="space-y-4"></div>
+                </div>
+
+                <!-- 5. LET'S APPLY -->
+                <div class="bg-purple-50/70 rounded-2xl border border-purple-200 p-6 space-y-3">
+                    <h3 class="font-heading font-bold text-purple-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-rocket text-purple-600"></i> 5. Let's Apply
+                    </h3>
+                    <p class="text-sm text-slate-700">Buatlah dialog singkat (4–6 baris) antara dua siswa SMA yang membahas video edukasi di YouTube. Pastikan memuat <strong>Starting, Continuing, dan Ending</strong>!</p>
+                    <textarea id="u2-apply-input" rows="4" placeholder="Tulis dialog singkatmu di sini..." class="w-full p-3 rounded-xl border border-purple-200 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"></textarea>
+                    <div class="flex justify-between items-center">
+                        <button onclick="saveReflection('u2-apply')" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 transition">Simpan Dialog Saya</button>
+                        <span id="u2-apply-status" class="text-xs font-semibold text-emerald-600 hidden"><i class="fa-solid fa-check"></i> Tersimpan!</span>
+                    </div>
+                </div>
+
+                <!-- 6. LET'S REFLECT -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-rose-700 text-sm flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> 6. Let's Reflect</h4>
+                        <p class="text-xs text-slate-600 mt-1">Ungkapan mana yang paling sering dan nyaman kamu gunakan untuk menjaga percakapan tetap ramah?</p>
+                    </div>
+                    <button onclick="markComplete('unit2'); switchTab('unit3')" class="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition flex items-center gap-2">
+                        Selesai & Lanjut Materi 3 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UNIT 3: GRAMMAR FOCUS: SUBJECT QUESTIONS   -->
+            <!-- ========================================== -->
+            <section id="sec-unit3" class="content-section hidden fade-in space-y-6">
+                <!-- Unit Header -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm border-l-4 border-l-amber-500">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Materi 3 • Grammar Focus</span>
+                    <h2 class="font-heading text-2xl font-extrabold text-slate-900 mt-1">Subject Questions</h2>
+                    <p class="text-sm text-slate-600 mt-1">Memahami cara membuat kalimat tanya ketika kata tanya (<em>Who</em> atau <em>What</em>) berperan langsung sebagai pelaku (subjek) tindakan.</p>
+                </div>
+
+                <!-- 1. LET'S EXPLORE -->
+                <div class="bg-amber-50/70 rounded-2xl border border-amber-200 p-6">
+                    <h3 class="font-heading font-bold text-amber-900 flex items-center gap-2 text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> 1. Let's Explore
+                    </h3>
+                    <p class="text-sm text-slate-700 mb-2">Bandingkan dua kalimat tanya berikut:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white p-3.5 rounded-xl border border-amber-200">
+                            <span class="text-xs font-bold text-indigo-600">Kalimat A:</span>
+                            <p class="font-semibold text-slate-900">"Who <u>creates</u> this educational content?"</p>
+                            <p class="text-xs text-slate-500 mt-1">Menanyakan <strong>pelaku</strong> (subjek) yang membuat konten.</p>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-xl border border-amber-200">
+                            <span class="text-xs font-bold text-rose-600">Kalimat B:</span>
+                            <p class="font-semibold text-slate-900">"Who <u>do you follow</u> on Instagram?"</p>
+                            <p class="text-xs text-slate-500 mt-1">Menanyakan <strong>sasaran</strong> (objek) yang kamu ikuti.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. LET'S LEARN -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <h3 class="font-heading font-bold text-indigo-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> 2. Let's Learn (Aturan & Pola Tata Bahasa)
+                    </h3>
+
+                    <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100 space-y-2 text-sm">
+                        <h4 class="font-bold text-indigo-950">a. Apa itu Subject Questions?</h4>
+                        <p class="text-slate-700">
+                            <strong>Subject Questions</strong> adalah kalimat tanya yang digunakan untuk menanyakan <strong>siapa (Who)</strong> atau <strong>apa (What)</strong> yang melakukan suatu tindakan (menanyakan Subjek kalimat).
+                        </p>
+                        <div class="bg-white p-3.5 rounded-xl border border-indigo-200 mt-2">
+                            <p class="font-bold text-indigo-700 text-xs uppercase mb-1">Rumus Pola Kalimat (Tanpa Auxiliary Do / Does / Did!):</p>
+                            <p class="font-mono text-sm sm:text-base font-bold text-slate-900">Who / What + Verb (Kata Kerja sesuai Tense) + Object / Complement?</p>
+                            <p class="text-xs text-slate-600 mt-1.5">
+                                <strong>Mengapa tanpa <em>do/does/did</em>?</strong> Karena kata tanya <em>Who/What</em> sudah menggantikan posisi subjek di awal kalimat, sehingga susunannya persis seperti kalimat positif! (Catatan: <em>Who/What</em> selalu dianggap tunggal/singular dalam Simple Present sehingga kata kerjanya ditambah <strong>-s/-es</strong>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <p class="font-bold text-indigo-700">1. Who creates digital content?</p>
+                            <p class="text-slate-600 mt-1">Siapa yang membuat konten digital? <br><span class="text-xs text-emerald-700">(Jawab: <strong>Rina</strong> creates digital content.)</span></p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <p class="font-bold text-indigo-700">2. Who shares information online?</p>
+                            <p class="text-slate-600 mt-1">Siapa yang membagikan informasi daring? <br><span class="text-xs text-emerald-700">(Jawab: <strong>Netizens</strong> share information online.)</span></p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <p class="font-bold text-indigo-700">3. What makes a digital identity unique?</p>
+                            <p class="text-slate-600 mt-1">Apa yang membuat identitas digital unik? <br><span class="text-xs text-emerald-700">(Jawab: <strong>Positive posts</strong> make it unique.)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table: Subject vs Object Questions -->
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm mb-2">b. Perbandingan Subject Questions vs. Object Questions</h4>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                        <th class="p-3 font-bold">Aspek</th>
+                                        <th class="p-3 font-bold text-indigo-700">Subject Questions</th>
+                                        <th class="p-3 font-bold text-rose-700">Object Questions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-3 font-semibold">Yang Ditanyakan</td>
+                                        <td class="p-3">Pelaku tindakan (<strong>Subjek</strong>)</td>
+                                        <td class="p-3">Penerima tindakan (<strong>Objek</strong>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold">Auxiliary (do/does/did)</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-xs">TIDAK DIGUNAKAN</span></td>
+                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs">WAJIB DIGUNAKAN</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold">Struktur Kalimat</td>
+                                        <td class="p-3 font-mono text-xs">Who/What + Verb + Object?</td>
+                                        <td class="p-3 font-mono text-xs">Who/What + do/does/did + Subject + Verb 1?</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold">Contoh Kalimat</td>
+                                        <td class="p-3"><strong>Who</strong> posted that photo?<br><span class="text-xs text-slate-500">(Siapa yang mengunggah foto itu?)</span></td>
+                                        <td class="p-3"><strong>What</strong> did Sarah post?<br><span class="text-xs text-slate-500">(Apa yang Sarah unggah?)</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Common Mistakes -->
+                    <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 space-y-2.5">
+                        <h4 class="font-bold text-rose-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> c. Common Mistakes (Kesalahan yang Sering Terjadi)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
+                            <div class="bg-white p-3 rounded-lg border border-rose-100">
+                                <p class="text-rose-600 font-semibold"><i class="fa-solid fa-xmark"></i> Salah: Who <u>does manage</u> this account?</p>
+                                <p class="text-emerald-700 font-semibold mt-1"><i class="fa-solid fa-check"></i> Benar: Who <u>manages</u> this account?</p>
+                                <p class="text-xs text-slate-500 mt-1">Penjelasan: Jangan tambahkan <em>does</em> karena <em>Who</em> adalah subjek.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-rose-100">
+                                <p class="text-rose-600 font-semibold"><i class="fa-solid fa-xmark"></i> Salah: What <u>did happen</u> to your profile?</p>
+                                <p class="text-emerald-700 font-semibold mt-1"><i class="fa-solid fa-check"></i> Benar: What <u>happened</u> to your profile?</p>
+                                <p class="text-xs text-slate-500 mt-1">Penjelasan: Langsung gunakan Verb 2 (<em>happened</em>) tanpa kata bantu <em>did</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. LET'S OBSERVE -->
+                <div class="bg-cyan-50/60 rounded-2xl border border-cyan-200 p-6 space-y-3">
+                    <h3 class="font-heading font-bold text-cyan-950 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-600"></i> 3. Let's Observe (Dialog Kontekstual)
+                    </h3>
+                    <div class="bg-white p-4 rounded-xl border border-cyan-100 text-sm space-y-2">
+                        <p><strong>Dina:</strong> "Look at our class Instagram account! It looks super neat now. <strong>Who designed</strong> the new feed layout?"</p>
+                        <p><strong>Kevin:</strong> "<strong>Rafi designed</strong> it yesterday. By the way, <strong>what inspired</strong> him to choose the blue theme?"</p>
+                        <p><strong>Dina:</strong> "He said <strong>ocean conservation</strong> inspired him!"</p>
+                    </div>
+                </div>
+
+                <!-- 4. LET'S PRACTICE -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <h3 class="font-heading font-bold text-emerald-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-pen-to-square text-emerald-600"></i> 4. Let's Practice (Latihan Subject Questions)
+                    </h3>
+                    <div id="u3-quiz-container" class="space-y-4"></div>
+                </div>
+
+                <!-- 5. LET'S APPLY -->
+                <div class="bg-purple-50/70 rounded-2xl border border-purple-200 p-6 space-y-3">
+                    <h3 class="font-heading font-bold text-purple-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-rocket text-purple-600"></i> 5. Let's Apply (Ubahlah menjadi Subject Question)
+                    </h3>
+                    <p class="text-sm text-slate-700">Ubahlah kalimat pernyataan berikut menjadi <strong>Subject Question</strong> yang menanyakan kata yang dicetak tebal:</p>
+                    <p class="text-sm font-semibold bg-white p-3 rounded-xl border border-purple-100">"<strong>A strong password</strong> protects our social media accounts from hackers."</p>
+                    <input type="text" id="u3-apply-input" placeholder="Ketik jawabanmu (Mulai dengan What...)" class="w-full p-3 rounded-xl border border-purple-200 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="checkU3Apply()" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 transition">Periksa Jawaban</button>
+                        <span id="u3-apply-feedback" class="text-xs font-semibold"></span>
+                    </div>
+                </div>
+
+                <!-- 6. LET'S REFLECT -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-rose-700 text-sm flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> 6. Let's Reflect</h4>
+                        <p class="text-xs text-slate-600 mt-1">Ingat aturan emasnya: Jika <em>Who/What</em> adalah pelaku (Subjek), jangan pernah gunakan <em>do/does/did</em>!</p>
+                    </div>
+                    <button onclick="markComplete('unit3'); switchTab('unit4')" class="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition flex items-center gap-2">
+                        Selesai & Lanjut Materi 4 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UNIT 4: VOCABULARY & READING               -->
+            <!-- ========================================== -->
+            <section id="sec-unit4" class="content-section hidden fade-in space-y-6">
+                <!-- Unit Header -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm border-l-4 border-l-emerald-600">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Materi 4 • Vocabulary & Reading Comprehension</span>
+                    <h2 class="font-heading text-2xl font-extrabold text-slate-900 mt-1">Digital Footprint & Netiquette</h2>
+                    <p class="text-sm text-slate-600 mt-1">Memperkaya kosakata literasi digital dan melatih pemahaman membaca teks berbahasa Inggris mengenai jejak digital serta etika berinternet.</p>
+                </div>
+
+                <!-- 1. LET'S EXPLORE -->
+                <div class="bg-amber-50/70 rounded-2xl border border-amber-200 p-6">
+                    <h3 class="font-heading font-bold text-amber-900 flex items-center gap-2 text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> 1. Let's Explore
+                    </h3>
+                    <p class="text-sm text-slate-700">
+                        Coba ketik namamu sendiri di mesin pencari Google! Hasil foto, akun media sosial, atau komentar yang muncul itulah sebagian kecil dari <strong>Digital Footprint</strong> (jejak digital) milikmu. Apakah kamu bangga jika guru atau universitas impianmu melihat jejak digitalmu hari ini?
+                    </p>
+                </div>
+
+                <!-- 2. LET'S LEARN (Vocabulary Cards) -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <h3 class="font-heading font-bold text-indigo-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> 2. Let's Learn (Kosakata Kunci)
+                    </h3>
+
+                    <!-- Sub-section A: Digital Footprint -->
+                    <div>
+                        <h4 class="font-bold text-indigo-700 text-base mb-1">a. Vocabulary: Digital Footprint (Jejak Digital)</h4>
+                        <p class="text-xs text-slate-600 mb-3"><strong>Digital Footprint</strong> adalah rekam jejak data yang ditinggalkan seseorang saat menggunakan internet.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">1. Digital identity</span>
+                                <span class="text-indigo-600 font-semibold">Identitas digital</span>
+                                <p class="text-slate-600 mt-1">Citra atau profil diri kita di internet.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Build a positive <strong>digital identity</strong>."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">2. Online activity</span>
+                                <span class="text-indigo-600 font-semibold">Aktivitas daring</span>
+                                <p class="text-slate-600 mt-1">Segala kegiatan yang dilakukan saat terhubung internet.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Every <strong>online activity</strong> leaves a record."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">3. Personal information</span>
+                                <span class="text-indigo-600 font-semibold">Informasi pribadi</span>
+                                <p class="text-slate-600 mt-1">Data sensitif seperti alamat, nomor HP, tanggal lahir.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Never share <strong>personal information</strong> publicly."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">4. Privacy</span>
+                                <span class="text-indigo-600 font-semibold">Privasi</span>
+                                <p class="text-slate-600 mt-1">Hak untuk menjaga kehidupan dan data pribadi agar tidak diketahui umum.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Check your account <strong>privacy</strong> settings."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">5. Digital trace</span>
+                                <span class="text-indigo-600 font-semibold">Jejak data digital</span>
+                                <p class="text-slate-600 mt-1">Sisa data seperti riwayat pencarian atau likes.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Deleted photos may still leave a <strong>digital trace</strong>."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">6. Online reputation</span>
+                                <span class="text-indigo-600 font-semibold">Reputasi daring</span>
+                                <p class="text-slate-600 mt-1">Penilaian orang lain terhadap diri kita berdasarkan perilaku di internet.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Good posts improve your <strong>online reputation</strong>."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">7. Social media</span>
+                                <span class="text-indigo-600 font-semibold">Media sosial</span>
+                                <p class="text-slate-600 mt-1">Platform digital untuk berinteraksi dan berbagi konten.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Use <strong>social media</strong> wisely."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
+                                <span class="font-bold text-indigo-900 text-sm block">8. Data security</span>
+                                <span class="text-indigo-600 font-semibold">Keamanan data</span>
+                                <p class="text-slate-600 mt-1">Perlindungan data digital dari pencurian atau peretasan.</p>
+                                <p class="italic text-slate-700 mt-1.5">"Two-factor authentication boosts <strong>data security</strong>."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-section B: Netiquette -->
+                    <div>
+                        <h4 class="font-bold text-emerald-700 text-base mb-1">b. Vocabulary: Netiquette (Etika Berinternet)</h4>
+                        <p class="text-xs text-slate-600 mb-3"><strong>Netiquette</strong> (Internet Etiquette) adalah aturan sopan santun dan etika dalam berkomunikasi di dunia digital.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">1. Respectful</span>
+                                <span class="text-emerald-600 font-semibold">Penuh hormat / sopan</span>
+                                <p class="italic text-slate-700 mt-1.5">"Always be <strong>respectful</strong> in group chats."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">2. Inappropriate</span>
+                                <span class="text-emerald-600 font-semibold">Tidak pantas</span>
+                                <p class="italic text-slate-700 mt-1.5">"Report any <strong>inappropriate</strong> comments."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">3. Cyberbullying</span>
+                                <span class="text-emerald-600 font-semibold">Perundungan siber</span>
+                                <p class="italic text-slate-700 mt-1.5">"Stop <strong>cyberbullying</strong> by spreading kindness."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">4. Comment</span>
+                                <span class="text-emerald-600 font-semibold">Komentar / berkomentar</span>
+                                <p class="italic text-slate-700 mt-1.5">"Think twice before you <strong>comment</strong>."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">5. Permission</span>
+                                <span class="text-emerald-600 font-semibold">Izin</span>
+                                <p class="italic text-slate-700 mt-1.5">"Ask for <strong>permission</strong> before tagging friends."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">6. Responsible</span>
+                                <span class="text-emerald-600 font-semibold">Bertanggung jawab</span>
+                                <p class="italic text-slate-700 mt-1.5">"Be a <strong>responsible</strong> digital citizen."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">7. Communication</span>
+                                <span class="text-emerald-600 font-semibold">Komunikasi</span>
+                                <p class="italic text-slate-700 mt-1.5">"Clear <strong>communication</strong> prevents misunderstandings."</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="font-bold text-emerald-900 text-sm block">8. Online behavior</span>
+                                <span class="text-emerald-600 font-semibold">Perilaku daring</span>
+                                <p class="italic text-slate-700 mt-1.5">"Our <strong>online behavior</strong> reflects our character."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. LET'S OBSERVE (Reading Passages) -->
+                <div class="bg-cyan-50/60 rounded-2xl border border-cyan-200 p-6 space-y-6">
+                    <h3 class="font-heading font-bold text-cyan-950 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-600"></i> 3. Let's Observe (Reading Comprehension Texts)
+                    </h3>
+
+                    <!-- TEXT 1 -->
+                    <article class="bg-white rounded-2xl border border-cyan-100 p-5 sm:p-6 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold">Reading Text 1</span>
+                            <span class="text-xs text-slate-400">Level: Grade XI (Intermediate)</span>
+                        </div>
+                        <h4 class="font-heading font-extrabold text-xl text-slate-900">Understanding Your Digital Footprint</h4>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-3">
+                            <p>
+                                Every time you browse the internet, post a photo on social media, or leave a comment on a video, you leave behind a trail of data known as a <strong>digital footprint</strong>. Simply put, a digital footprint is the permanent record of your online activities. Even when you click the "delete" button, copies of your posts or screenshots taken by others may still exist somewhere on the internet.
+                            </p>
+                            <p>
+                                Many teenagers do not realize that their daily online behavior shapes their <strong>digital identity</strong> and <strong>online reputation</strong>. For instance, sharing personal information—such as your home address, phone number, or school schedule—can put your privacy and data security at risk. Furthermore, posting rude comments or inappropriate memes can negatively affect your future, because universities and future employers often review applicants' public profiles before making decisions.
+                            </p>
+                            <p>
+                                Therefore, managing your digital footprint is crucial. You can build a positive digital identity by sharing your creative projects, achievements, or helpful insights. Always use strong passwords, adjust your privacy settings, and ask yourself: <em>"Would I be proud if my family or teachers saw this post?"</em>
+                            </p>
+                        </div>
+                        <!-- Glossary Box -->
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                            <strong class="text-slate-800">Bantuan Kosakata (Glossary):</strong>
+                            <em>trail of data</em> = jejak data • <em>permanent record</em> = catatan permanen • <em>applicants</em> = pelamar • <em>crucial</em> = sangat penting • <em>achievements</em> = pencapaian.
+                        </div>
+                    </article>
+
+                    <!-- TEXT 2 -->
+                    <article class="bg-white rounded-2xl border border-cyan-100 p-5 sm:p-6 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">Reading Text 2</span>
+                            <span class="text-xs text-slate-400">Level: Grade XI (Intermediate)</span>
+                        </div>
+                        <h4 class="font-heading font-extrabold text-xl text-slate-900">Practicing Good Netiquette</h4>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-3">
+                            <p>
+                                The internet connects millions of people from diverse backgrounds, making respectful communication more important than ever. <strong>Netiquette</strong>, short for "internet etiquette," refers to the set of rules for polite and responsible behavior online. Just as we follow manners in the classroom or at home, we must also treat others with kindness behind our screens.
+                            </p>
+                            <p>
+                                One golden rule of netiquette is to remember the human behind the screen. Because online messages lack facial expressions and tone of voice, words can easily be misunderstood. Typing in ALL CAPS, for example, is often seen as shouting. Additionally, we must respect others' opinions during online discussions and strictly avoid cyberbullying, hate speech, or spreading unverified rumors.
+                            </p>
+                            <p>
+                                Respecting privacy is another essential part of netiquette. Before uploading a group photo or tagging a friend in a post, always ask for their permission first. By practicing good netiquette, students contribute to a safer, healthier, and more supportive digital community for everyone.
+                            </p>
+                        </div>
+                        <!-- Glossary Box -->
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                            <strong class="text-slate-800">Bantuan Kosakata (Glossary):</strong>
+                            <em>diverse backgrounds</em> = latar belakang beragam • <em>manners</em> = tata krama • <em>facial expressions</em> = ekspresi wajah • <em>unverified rumors</em> = rumor yang belum terbukti kebenarannya.
+                        </div>
+                    </article>
+                </div>
+
+                <!-- 4. LET'S PRACTICE (Reading Comprehension Questions) -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <h3 class="font-heading font-bold text-emerald-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-pen-to-square text-emerald-600"></i> 4. Let's Practice (Pemahaman Bacaan)
+                    </h3>
+                    <div id="u4-quiz-container" class="space-y-4"></div>
+
+                    <!-- Essay Question with Toggle Answer Key -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-sm">
+                        <p class="font-bold text-slate-800">Pertanyaan Uraian (Short Answer):</p>
+                        <p class="text-slate-700">1. Based on Text 1, why should teenagers avoid posting rude comments or personal information online?</p>
+                        <p class="text-slate-700">2. Based on Text 2, what should you do before posting a photo that includes your friends?</p>
+                        <button onclick="toggleElement('u4-essay-key')" class="mt-2 px-3.5 py-1.5 rounded-lg bg-indigo-100 text-indigo-800 text-xs font-bold hover:bg-indigo-200 transition">
+                            Lihat Kunci Jawaban & Pembahasan Uraian
+                        </button>
+                        <div id="u4-essay-key" class="hidden mt-3 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2 text-slate-800">
+                            <p><strong>Jawaban 1:</strong> Because sharing personal information puts privacy and data security at risk, while rude comments can harm their online reputation when reviewed by universities or future employers.</p>
+                            <p><strong>Jawaban 2:</strong> We should ask for their permission first before uploading the photo or tagging them.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 & 6. LET'S APPLY & REFLECT -->
+                <div class="bg-rose-50/70 rounded-2xl border border-rose-200 p-6 space-y-4">
+                    <h3 class="font-heading font-bold text-rose-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-heart text-rose-600"></i> 5 & 6. Let's Apply & Let's Reflect (Digital Habit Check)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-700">Centang kebiasaan positif yang sudah kamu terapkan dalam kehidupan digitalmu sehari-hari:</p>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center gap-3 p-3 bg-white rounded-xl border border-rose-100 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded">
+                            <span>Saya tidak membagikan alamat rumah atau nomor telepon pribadi secara publik.</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-white rounded-xl border border-rose-100 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded">
+                            <span>Saya selalu meminta izin teman sebelum mengunggah foto bersama mereka.</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 bg-white rounded-xl border border-rose-100 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded">
+                            <span>Saya menggunakan bahasa yang sopan dan menghindari komentar negatif di internet.</span>
+                        </label>
+                    </div>
+                    <div class="flex justify-end pt-2">
+                        <button onclick="markComplete('unit4'); switchTab('unit5')" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition flex items-center gap-2">
+                            Selesai & Lanjut Materi 5 <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- UNIT 5: WRITING & SPEAKING PROJECT         -->
+            <!-- ========================================== -->
+            <section id="sec-unit5" class="content-section hidden fade-in space-y-6">
+                <!-- Unit Header -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm border-l-4 border-l-purple-600">
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-600">Materi 5 • Writing & Speaking Project</span>
+                    <h2 class="font-heading text-2xl font-extrabold text-slate-900 mt-1">Crafting a Social Media Caption or Bio</h2>
+                    <p class="text-sm text-slate-600 mt-1">Merancang bio dan caption media sosial dalam bahasa Inggris yang kreatif, autentik, dan mencerminkan identitas diri secara positif.</p>
+                </div>
+
+                <!-- 1. LET'S EXPLORE -->
+                <div class="bg-amber-50/70 rounded-2xl border border-amber-200 p-6">
+                    <h3 class="font-heading font-bold text-amber-900 flex items-center gap-2 text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> 1. Let's Explore
+                    </h3>
+                    <p class="text-sm text-slate-700">
+                        Ketika seseorang mengunjungi profil Instagram, TikTok, atau LinkedIn milikmu untuk pertama kali, bagian apa yang pertama kali mereka baca? Ya, <strong>Bio</strong> dan <strong>Caption</strong>! Keduanya adalah "kartu nama digital" yang memperkenalkan siapa dirimu kepada dunia.
+                    </p>
+                </div>
+
+                <!-- 2 & 3. LET'S LEARN & OBSERVE -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
+                    <h3 class="font-heading font-bold text-indigo-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> 2 & 3. Let's Learn & Observe: Social Media Bio vs. Caption
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Bio Card -->
+                        <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2">
+                            <h4 class="font-bold text-indigo-900 text-base">a. Social Media Bio (Biografi Singkat)</h4>
+                            <p class="text-xs text-slate-600">Ringkasan identitas diri di bagian atas profil (biasanya maksimal 150 karakter). Menjelaskan siapa kamu, minat/hobi, dan nilai hidupmu.</p>
+                            <div class="bg-white p-3.5 rounded-xl border border-indigo-200 text-xs space-y-2">
+                                <p class="font-bold text-indigo-700">Contoh Bio Baik:</p>
+                                <p class="font-mono text-slate-800 bg-slate-50 p-2 rounded">
+                                    🎨 11th Grader | Digital Art Enthusiast<br>
+                                    📚 Bookworm & School Debate Club<br>
+                                    ✨ Sharing positivity & daily learning journeys
+                                </p>
+                                <p class="text-slate-500"><em>Artinya: Siswa kelas 11 | Penggemar Seni Digital • Kutu buku & Klub Debat Sekolah • Berbagi hal positif & perjalanan belajar harian.</em></p>
+                            </div>
+                        </div>
+
+                        <!-- Caption Card -->
+                        <div class="p-4 rounded-xl bg-purple-50/60 border border-purple-100 space-y-2">
+                            <h4 class="font-bold text-purple-900 text-base">b. Social Media Caption (Keterangan Unggahan)</h4>
+                            <p class="text-xs text-slate-600">Teks pelengkap foto/video yang menceritakan konteks momen, perasaan, pesan inspiratif, dan ajakan berinteraksi (<em>Call to Action</em>).</p>
+                            <div class="bg-white p-3.5 rounded-xl border border-purple-200 text-xs space-y-2">
+                                <p class="font-bold text-purple-700">Contoh Caption Baik:</p>
+                                <p class="text-slate-800 bg-slate-50 p-2 rounded">
+                                    "Finished our school science project today! 🧪 Working together taught me that teamwork makes every challenge easier. What is your favorite subject at school? 👇 #StudentLife #Teamwork"
+                                </p>
+                                <p class="text-slate-500"><em>Artinya: Menyelesaikan proyek sains sekolah hari ini! Bekerja sama mengajarkanku bahwa kerja tim membuat setiap tantangan lebih mudah. Apa pelajaran favoritmu di sekolah?</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Characteristics of Good Bio & Caption -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+                        <h4 class="font-bold text-slate-800 mb-2">Ciri-ciri Caption & Bio yang Positif dan Berkualitas:</h4>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
+                            <li><i class="fa-solid fa-circle-check text-emerald-500 mr-1.5"></i> <strong>Authentic:</strong> Jujur mencerminkan kepribadian dan minat asli.</li>
+                            <li><i class="fa-solid fa-circle-check text-emerald-500 mr-1.5"></i> <strong>Safe & Private:</strong> Tidak mencantumkan alamat rumah/nomor HP.</li>
+                            <li><i class="fa-solid fa-circle-check text-emerald-500 mr-1.5"></i> <strong>Correct Grammar:</strong> Menggunakan tata bahasa & ejaan yang tepat.</li>
+                            <li><i class="fa-solid fa-circle-check text-emerald-500 mr-1.5"></i> <strong>Positive Tone:</strong> Menginspirasi, sopan, dan bebas ujaran kebencian.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4 & 5. LET'S PRACTICE & APPLY: INTERACTIVE STUDIO -->
+                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-200 p-6 shadow-sm space-y-5">
+                    <h3 class="font-heading font-bold text-indigo-950 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i> 4 & 5. Writing Project Studio: Social Media Profile Simulator
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600">Rancang <strong>1 Social Media Bio</strong> dan <strong>1 Social Media Caption</strong> milikmu di bawah ini dan lihat pratinjau tampilannya secara langsung!</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Input Form -->
+                        <div class="space-y-4 bg-white p-5 rounded-2xl border border-slate-200">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nama Tampilan / Username</label>
+                                <input type="text" id="proj-name" oninput="updatePreview()" placeholder="Contoh: @nabila.learns" class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <div class="flex justify-between">
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">1. Social Media Bio (Maks. 150 karakter)</label>
+                                    <span id="bio-counter" class="text-xs text-slate-400">0/150</span>
+                                </div>
+                                <textarea id="proj-bio" rows="3" maxlength="150" oninput="updatePreview()" placeholder="Tulis bio dalam bahasa Inggris (identitas, hobi, motto)..." class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">2. Social Media Caption (Cerita pengalaman/hobi positif)</label>
+                                <textarea id="proj-caption" rows="4" oninput="updatePreview()" placeholder="Tulis caption dalam bahasa Inggris beserta hashtag..." class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+                            </div>
+                            <button onclick="saveReflection('u5-project')" class="w-full py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition">
+                                <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Proyek Saya
+                            </button>
+                            <p id="u5-project-status" class="text-xs text-center font-semibold text-emerald-600 hidden">Proyek berhasil disimpan! Siap dipresentasikan.</p>
+                        </div>
+
+                        <!-- Live Social Card Preview -->
+                        <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col justify-between">
+                            <div>
+                                <!-- Mock App Top Bar -->
+                                <div class="bg-slate-900 text-white px-4 py-2.5 flex items-center justify-between text-xs">
+                                    <span class="font-bold"><i class="fa-brands fa-instagram mr-1.5"></i> EduGram Preview</span>
+                                    <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-shield-halved"></i> Positive Identity</span>
+                                </div>
+                                <!-- Profile Header -->
+                                <div class="p-4 border-b border-slate-100 flex items-center gap-3.5">
+                                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xl shrink-0">
+                                        <i class="fa-solid fa-user-astronaut"></i>
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <h5 id="prev-name" class="font-bold text-slate-900 text-sm truncate">@student.identity</h5>
+                                        <p id="prev-bio" class="text-xs text-slate-600 whitespace-pre-line mt-1">11th Grade Student • Lifelong Learner ✨</p>
+                                    </div>
+                                </div>
+                                <!-- Mock Post Image -->
+                                <div class="bg-gradient-to-r from-indigo-100 via-cyan-100 to-purple-100 h-32 flex flex-col items-center justify-center text-indigo-800 p-4 text-center">
+                                    <i class="fa-solid fa-camera-retro text-2xl mb-1 opacity-75"></i>
+                                    <span class="text-xs font-semibold">Your Positive Moment Photo</span>
+                                </div>
+                                <!-- Caption Area -->
+                                <div class="p-4 text-xs sm:text-sm">
+                                    <p class="text-slate-800 leading-relaxed">
+                                        <strong id="prev-name-cap" class="mr-1">@student.identity</strong>
+                                        <span id="prev-caption">Sharing my journey in learning digital literacy! Always stay kind and creative online. #DigitalLiteracy #Grade11</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speaking Project Guide -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+                    <h3 class="font-heading font-bold text-cyan-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-microphone-lines text-cyan-600"></i> Speaking Project Guide (Panduan Presentasi Lisan)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600">Presentasikan bio dan caption yang telah kamu buat di depan kelas atau kelompok kecil (durasi 1–2 menit) menggunakan kerangka berikut:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-indigo-700 block mb-1">1. Opening (Pembuka)</span>
+                            <p class="italic text-slate-700">"Good morning, everyone. Today, I would like to present my social media bio and caption that represent my positive digital identity."</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-indigo-700 block mb-1">2. Explaining Content (Isi & Alasan)</span>
+                            <p class="italic text-slate-700">"In my bio, I wrote '...' because I want people to know my passion for... For my caption, I chose this topic to inspire others..."</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-indigo-700 block mb-1">3. Closing (Penutup)</span>
+                            <p class="italic text-slate-700">"That is all from me. Remember to always think before you post. Thank you for listening!"</p>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
+                        <strong>Tips Pengucapan & Kelancaran:</strong> Perhatikan pelafalan kata kunci seperti <em>identity</em> (/aɪˈdentəti/), <em>digital</em> (/ˈdɪdʒɪtl/), <em>enthusiast</em> (/ɪnˈθuːziæst/), dan <em>positive</em> (/ˈpɒzətɪv/). Berbicaralah dengan tempo sedang dan kontak mata yang percaya diri.
+                    </div>
+                </div>
+
+                <!-- Assessment Rubric -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-3">
+                    <h3 class="font-heading font-bold text-slate-900 flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-table-list text-indigo-600"></i> Rubrik Penilaian Proyek (Writing & Speaking)
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                    <th class="p-2.5 font-bold">Kriteria</th>
+                                    <th class="p-2.5 font-bold text-emerald-700">Sangat Baik (4)</th>
+                                    <th class="p-2.5 font-bold text-indigo-700">Baik (3)</th>
+                                    <th class="p-2.5 font-bold text-amber-700">Cukup (2)</th>
+                                    <th class="p-2.5 font-bold text-rose-700">Perlu Bimbingan (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-2.5 font-bold">Content & Creativity</td>
+                                    <td class="p-2.5">Sangat kreatif, autentik, aman privasi, dan mencerminkan identitas positif.</td>
+                                    <td class="p-2.5">Kreatif, relevan dengan identitas positif, dan aman.</td>
+                                    <td class="p-2.5">Cukup sesuai topik namun kurang orisinal.</td>
+                                    <td class="p-2.5">Kurang relevan atau membocorkan data pribadi.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Vocabulary</td>
+                                    <td class="p-2.5">Pilihan kosakata kaya, tepat konteks media sosial & literasi digital.</td>
+                                    <td class="p-2.5">Pilihan kosakata tepat dan mudah dipahami.</td>
+                                    <td class="p-2.5">Kosakata terbatas dan terdapat pengulangan.</td>
+                                    <td class="p-2.5">Banyak kesalahan pemilihan kata.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Grammar</td>
+                                    <td class="p-2.5">Struktur kalimat akurat tanpa kesalahan tata bahasa berarti.</td>
+                                    <td class="p-2.5">Terdapat 1–2 kesalahan kecil yang tidak mengganggu makna.</td>
+                                    <td class="p-2.5">Beberapa kesalahan tata bahasa cukup terlihat.</td>
+                                    <td class="p-2.5">Banyak kesalahan tata bahasa sehingga sulit dipahami.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Organization</td>
+                                    <td class="p-2.5">Alur bio/caption dan presentasi sangat runtut (pembuka-isi-penutup).</td>
+                                    <td class="p-2.5">Struktur tulisan dan presentasi runtut.</td>
+                                    <td class="p-2.5">Struktur kurang terorganisir dengan baik.</td>
+                                    <td class="p-2.5">Tidak memiliki struktur yang jelas.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">Pronunciation & Fluency (Speaking)</td>
+                                    <td class="p-2.5">Pelafalan sangat jelas, lancar, intonasi alami dan percaya diri.</td>
+                                    <td class="p-2.5">Pelafalan jelas dan cukup lancar dengan sedikit jeda.</td>
+                                    <td class="p-2.5">Sering ragu-ragu dan beberapa salah lafal.</td>
+                                    <td class="p-2.5">Sangat terbata-bata dan sulit dipahami.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Next Button -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-rose-700 text-sm flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> 6. Let's Reflect</h4>
+                        <p class="text-xs text-slate-600 mt-1">Bagaimana perasaanmu setelah merancang identitas digital positifmu sendiri dalam bahasa Inggris?</p>
+                    </div>
+                    <button onclick="markComplete('unit5'); switchTab('evaluation')" class="shrink-0 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition flex items-center gap-2">
+                        Lanjut ke Evaluasi Akhir Bab <i class="fa-solid fa-award"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- EVALUASI AKHIR CHAPTER                     -->
+            <!-- ========================================== -->
+            <section id="sec-evaluation" class="content-section hidden fade-in space-y-6">
+                <div class="bg-gradient-to-r from-indigo-900 to-purple-900 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
+                    <span class="px-3 py-1 rounded-full bg-white/15 text-xs font-bold uppercase tracking-wider text-cyan-200">Chapter 1 Assessment</span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-extrabold mt-2">Evaluasi Akhir Chapter 1</h2>
+                    <p class="text-indigo-100 text-xs sm:text-sm mt-1">
+                        Uji pemahamanmu mencakup seluruh materi (Opinions, Conversation, Subject Questions, Vocabulary & Reading). Jawab seluruh 10 soal di bawah ini untuk mendapatkan skor otomatis beserta pembahasan lengkap!
+                    </p>
+                </div>
+
+                <!-- Quiz Questions Container -->
+                <div id="final-exam-container" class="space-y-4"></div>
+
+                <!-- Submit Exam Button -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-xs sm:text-sm text-slate-600">
+                        <strong>Pedoman Penskoran:</strong> Setiap jawaban benar bernilai <strong>10 poin</strong> (Total maksimal: <strong>100 poin</strong>).
+                    </div>
+                    <div class="flex gap-3 w-full sm:w-auto">
+                        <button onclick="resetFinalExam()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs sm:text-sm font-bold hover:bg-slate-100 transition">
+                            Reset Jawaban
+                        </button>
+                        <button onclick="submitFinalExam()" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition shadow-md">
+                            Kirim & Lihat Nilai
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result & Feedback Card -->
+                <div id="exam-result-card" class="hidden bg-white rounded-2xl border-2 border-indigo-500 p-6 sm:p-8 shadow-lg space-y-4 fade-in">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-indigo-600">Hasil Evaluasi Belajar</span>
+                            <h3 id="exam-grade-title" class="font-heading text-2xl font-extrabold text-slate-900 mt-0.5">Luar Biasa!</h3>
+                            <p id="exam-feedback-msg" class="text-sm text-slate-600 mt-1"></p>
+                        </div>
+                        <div class="w-24 h-24 rounded-2xl bg-indigo-50 border-2 border-indigo-200 flex flex-col items-center justify-center shrink-0">
+                            <span class="text-xs font-bold text-indigo-600">SKOR</span>
+                            <span id="exam-score-number" class="font-heading text-3xl font-extrabold text-indigo-900">100</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500">Gulir ke atas untuk melihat kunci jawaban dan pembahasan detail di setiap nomor soal.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs" onclick="toggleMobileMenu()"></div>
+        <div class="fixed right-0 top-0 bottom-0 w-72 bg-white p-5 shadow-2xl flex flex-col justify-between overflow-y-auto">
+            <div class="space-y-2">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <span class="font-heading font-bold text-slate-900">Navigasi Modul</span>
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <button onclick="switchTab('overview'); toggleMobileMenu()" data-tab="overview" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold tab-active">
+                    <i class="fa-solid fa-compass w-4"></i> Pengantar & Tujuan
+                </button>
+                <button onclick="switchTab('unit1'); toggleMobileMenu()" data-tab="unit1" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600">
+                    <i class="fa-solid fa-comments w-4"></i> 1. Expressing Opinions
+                </button>
+                <button onclick="switchTab('unit2'); toggleMobileMenu()" data-tab="unit2" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600">
+                    <i class="fa-solid fa-handshake-angle w-4"></i> 2. Managing Conversations
+                </button>
+                <button onclick="switchTab('unit3'); toggleMobileMenu()" data-tab="unit3" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600">
+                    <i class="fa-solid fa-spell-check w-4"></i> 3. Subject Questions
+                </button>
+                <button onclick="switchTab('unit4'); toggleMobileMenu()" data-tab="unit4" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600">
+                    <i class="fa-solid fa-book-open-reader w-4"></i> 4. Footprint & Netiquette
+                </button>
+                <button onclick="switchTab('unit5'); toggleMobileMenu()" data-tab="unit5" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-semibold text-slate-600">
+                    <i class="fa-solid fa-pen-nib w-4"></i> 5. Caption & Bio Project
+                </button>
+                <button onclick="switchTab('evaluation'); toggleMobileMenu()" data-tab="evaluation" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left text-sm font-bold text-indigo-700 bg-indigo-50">
+                    <i class="fa-solid fa-award w-4"></i> Evaluasi Akhir Bab
+                </button>
+            </div>
+            <div class="pt-4 border-t border-slate-100 text-xs text-slate-400 text-center">
+                Bahasa Inggris Kelas XI • Fase F
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+            <p><strong>Modul Digital Bahasa Inggris Kelas XI SMA (Fase F)</strong> — Chapter 1: Digital Literacies and My Identities</p>
+            <p>Designed for Interactive Independent & Classroom Learning</p>
+        </div>
+    </footer>
+
+    <!-- Application Logic (JavaScript) -->
+    <script>
+        // ==========================================
+        // 1. STATE & PROGRESS TRACKING
+        // ==========================================
+        const completedSections = new Set();
+        const totalSections = 6; // overview, unit1, unit2, unit3, unit4, unit5
+
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+            // Show target section
+            const target = document.getElementById(`sec-${tabId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+            // Update active button states across sidebar & mobile drawer
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('tab-active');
+                    btn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                } else {
+                    btn.classList.remove('tab-active');
+                    if (btn.dataset.tab !== 'evaluation') {
+                        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function markComplete(sectionId) {
+            completedSections.add(sectionId);
+            const checkIcon = document.getElementById(`check-${sectionId}`);
+            if (checkIcon) {
+                checkIcon.classList.remove('hidden', 'opacity-0');
+            }
+            const pct = Math.min(100, Math.round((completedSections.size / totalSections) * 100));
+            document.getElementById('progress-text').textContent = `${pct}%`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('mobile-progress-bar').style.width = `${pct}%`;
+        }
+
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleElement(elId) {
+            const el = document.getElementById(elId);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function saveReflection(prefix) {
+            const status = document.getElementById(`${prefix}-status`);
+            if (status) {
+                status.classList.remove('hidden');
+                setTimeout(() => status.classList.add('hidden'), 3000);
+            }
+        }
+
+        // ==========================================
+        // 2. UNIT QUIZZES DATA & RENDERER
+        // ==========================================
+        const unitQuizzes = {
+            u1: [
+                {
+                    q: "1. Lani: 'Social media helps students find study groups easily.'\nBudi: '_____. I joined an English club online last month.'",
+                    options: [
+                        "I respectfully disagree",
+                        "I couldn't agree more",
+                        "I have a different opinion",
+                        "From my point of view, it's bad"
+                    ],
+                    answer: 1,
+                    explanation: "Budi memberikan contoh pengalaman positif yang mendukung pernyataan Lani, sehingga ungkapan menyetujui ('I couldn't agree more') adalah yang paling tepat."
+                },
+                {
+                    q: "2. Manakah ungkapan yang paling sopan untuk menyanggah pendapat teman dalam diskusi kelas?",
+                    options: [
+                        "You are totally wrong about that!",
+                        "That makes no sense at all.",
+                        "I see your point, but I think we also need to consider data privacy.",
+                        "Stop talking about that."
+                    ],
+                    answer: 2,
+                    explanation: "'I see your point, but...' menghargai pendapat lawan bicara terlebih dahulu sebelum menyampaikan sudut pandang yang berbeda."
+                }
+            ],
+            u2: [
+                {
+                    q: "1. Perhatikan kalimat acak berikut:\n(1) Rina: 'Really? Tell me more about the topic!'\n(2) Andi: 'Hi Rina! Have you read the article about digital footprint?'\n(3) Andi: 'Sure! It explains how our posts stay online forever. Oh, the bell is ringing. See you later!'\n(4) Rina: 'Not yet. What is it about?'\nUrutan percakapan yang tepat adalah...",
+                    options: [
+                        "(2) - (4) - (1) - (3)",
+                        "(2) - (1) - (4) - (3)",
+                        "(4) - (2) - (1) - (3)",
+                        "(1) - (2) - (3) - (4)"
+                    ],
+                    answer: 0,
+                    explanation: "Dimulai dengan sapaan pembuka (2), dijawab pertanyaan lanjutan (4), direspons dengan ketertarikan (1), dan ditutup dengan informasi serta pamitan (3)."
+                },
+                {
+                    q: "2. Ungkapan yang tepat untuk mengakhiri percakapan secara sopan ketika harus segera masuk kelas adalah...",
+                    options: [
+                        "Have you seen the latest post?",
+                        "That's super interesting!",
+                        "I'm sorry, I have to go to class now. Talk to you later!",
+                        "How have you been?"
+                    ],
+                    answer: 2,
+                    explanation: "Kalimat tersebut memberikan alasan jelas dan salam perpisahan yang sopan untuk menutup obrolan."
+                }
+            ],
+            u3: [
+                {
+                    q: "1. Pilih struktur Subject Question yang benar secara tata bahasa:",
+                    options: [
+                        "Who does upload the school announcements?",
+                        "Who uploads the school announcements?",
+                        "Who did uploaded the school announcements?",
+                        "Who upload the school announcements?"
+                    ],
+                    answer: 1,
+                    explanation: "Pada Subject Question (Simple Present), kata tanya 'Who' dianggap tunggal sehingga kata kerja langsung ditambah -s ('uploads') tanpa kata bantu 'does'."
+                },
+                {
+                    q: "2. '_____ caused the website to crash yesterday?' (Menanyakan penyebab/subjek kejadian)",
+                    options: [
+                        "What did",
+                        "What does",
+                        "What",
+                        "Who did"
+                    ],
+                    answer: 2,
+                    explanation: "Karena 'What' berperan sebagai subjek yang menyebabkan website crash, langsung diikuti Verb 2 ('caused') tanpa 'did'."
+                }
+            ],
+            u4: [
+                {
+                    q: "1. Based on Text 1 ('Understanding Your Digital Footprint'), what happens when you delete a photo on social media?",
+                    options: [
+                        "It disappears completely from the entire internet forever.",
+                        "Copies or screenshots taken by others may still exist online.",
+                        "Your account privacy is automatically upgraded.",
+                        "Search engines immediately erase your name."
+                    ],
+                    answer: 1,
+                    explanation: "Pada paragraf pertama Teks 1 dijelaskan: 'Even when you click the delete button, copies of your posts or screenshots taken by others may still exist somewhere on the internet.'"
+                },
+                {
+                    q: "2. According to Text 2 ('Practicing Good Netiquette'), why should we avoid typing in ALL CAPS?",
+                    options: [
+                        "It uses too much internet data.",
+                        "It is often interpreted as shouting.",
+                        "It makes sentences grammatically incorrect.",
+                        "It hides your digital identity."
+                    ],
+                    answer: 1,
+                    explanation: "Pada paragraf kedua Teks 2 disebutkan: 'Typing in ALL CAPS, for example, is often seen as shouting.'"
+                }
+            ]
+        };
+
+        function renderUnitQuizzes() {
+            Object.keys(unitQuizzes).forEach(unitKey => {
+                const container = document.getElementById(`${unitKey}-quiz-container`);
+                if (!container) return;
+
+                unitQuizzes[unitKey].forEach((item, qIndex) => {
+                    const card = document.createElement('div');
+                    card.className = "p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 text-sm";
+                    
+                    const qText = document.createElement('p');
+                    qText.className = "font-semibold text-slate-800 whitespace-pre-line";
+                    qText.textContent = item.q;
+                    card.appendChild(qText);
+
+                    const optGrid = document.createElement('div');
+                    optGrid.className = "grid grid-cols-1 gap-2";
+
+                    const feedbackBox = document.createElement('div');
+                    feedbackBox.className = "hidden p-3 rounded-lg text-xs mt-2";
+
+                    item.options.forEach((optText, oIndex) => {
+                        const btn = document.createElement('button');
+                        btn.className = "text-left p-2.5 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition text-xs sm:text-sm font-medium text-slate-700";
+                        btn.textContent = `${String.fromCharCode(65 + oIndex)}. ${optText}`;
+                        btn.onclick = () => {
+                            // Reset sibling buttons
+                            optGrid.querySelectorAll('button').forEach(b => {
+                                b.classList.remove('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'bg-rose-100', 'border-rose-500', 'text-rose-900');
+                            });
+                            feedbackBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-rose-50', 'text-rose-800', 'border-rose-200');
+                            
+                            if (oIndex === item.answer) {
+                                btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                                feedbackBox.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200');
+                                feedbackBox.innerHTML = `<strong><i class="fa-solid fa-circle-check"></i> Tepat!</strong> ${item.explanation}`;
+                            } else {
+                                btn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+                                feedbackBox.classList.add('bg-rose-50', 'text-rose-800', 'border', 'border-rose-200');
+                                feedbackBox.innerHTML = `<strong><i class="fa-solid fa-circle-xmark"></i> Kurang tepat.</strong> ${item.explanation}`;
+                            }
+                        };
+                        optGrid.appendChild(btn);
+                    });
+
+                    card.appendChild(optGrid);
+                    card.appendChild(feedbackBox);
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        // Unit 3 Apply Checker
+        function checkU3Apply() {
+            const val = document.getElementById('u3-apply-input').value.trim();
+            const fb = document.getElementById('u3-apply-feedback');
+            const normalized = val.toLowerCase().replace(/\?/g, '');
+            if (normalized === "what protects our social media accounts from hackers") {
+                fb.className = "text-xs font-bold text-emerald-600";
+                fb.innerHTML = "<i class='fa-solid fa-circle-check'></i> Sempurna! 'What protects our social media accounts from hackers?'";
+            } else {
+                fb.className = "text-xs font-semibold text-amber-700";
+                fb.innerHTML = "<i class='fa-solid fa-lightbulb'></i> Kunci Jawaban: What protects our social media accounts from hackers? (Ingat: tanpa kata bantu 'does').";
+            }
+        }
+
+        // ==========================================
+        // 3. UNIT 5: LIVE PREVIEW GENERATOR
+        // ==========================================
+        function updatePreview() {
+            const name = document.getElementById('proj-name').value.trim() || '@student.identity';
+            const bio = document.getElementById('proj-bio').value;
+            const caption = document.getElementById('proj-caption').value.trim() || 'Sharing my journey in learning digital literacy! Always stay kind and creative online. #DigitalLiteracy #Grade11';
+
+            document.getElementById('bio-counter').textContent = `${bio.length}/150`;
+            document.getElementById('prev-name').textContent = name;
+            document.getElementById('prev-name-cap').textContent = name;
+            document.getElementById('prev-bio').textContent = bio || '11th Grade Student • Lifelong Learner ✨';
+            document.getElementById('prev-caption').textContent = caption;
+        }
+
+        // ==========================================
+        // 4. FINAL CHAPTER EVALUATION (10 QUESTIONS)
+        // ==========================================
+        const finalExamData = [
+            {
+                topic: "Expressing Opinions",
+                q: "1. Sinta: 'I think students should use social media to build a digital portfolio.'\nTono: '_____. It helps universities see our creativity and skills.'",
+                options: [
+                    "I respectfully disagree",
+                    "That's a valid point",
+                    "I have a different opinion",
+                    "I'm not sure about that"
+                ],
+                answer: 1,
+                explanation: "Tono mendukung gagasan Sinta dengan alasan positif, sehingga 'That's a valid point' (Itu poin yang tepat) paling sesuai."
+            },
+            {
+                topic: "Defending Opinions",
+                q: "2. 'I strongly believe that digital literacy must be taught at school _____ teenagers need to know how to avoid online scams.'",
+                options: [
+                    "although",
+                    "because",
+                    "however",
+                    "unless"
+                ],
+                answer: 1,
+                explanation: "Untuk mempertahankan pendapat (Defending Opinions), kata hubung 'because' digunakan untuk memperkenalkan alasan atau bukti pendukung."
+            },
+            {
+                topic: "Disagreeing Politely",
+                q: "3. Which expression shows polite disagreement in a formal discussion?",
+                options: [
+                    "Your opinion is completely useless.",
+                    "I see your point, but I respectfully disagree.",
+                    "No way, you don't know anything.",
+                    "Whatever you say, I don't care."
+                ],
+                answer: 1,
+                explanation: "'I see your point, but I respectfully disagree' adalah cara santun untuk berbeda pendapat dalam situasi formal."
+            },
+            {
+                topic: "Managing Conversations",
+                q: "4. Maya: 'Hey, I noticed your painting on the school blog. It's amazing!'\nRizky: 'Thank you! I spent two weeks working on it.'\nMaya: '_____'\nWhich response best continues the conversation?",
+                options: [
+                    "Goodbye, see you tomorrow!",
+                    "Really? What inspired you to paint that theme?",
+                    "I have to go now, sorry.",
+                    "Nice talking to you."
+                ],
+                answer: 1,
+                explanation: "Untuk melanjutkan percakapan (Continuing), ajukan pertanyaan lanjutan yang menunjukkan ketertarikan pada cerita lawan bicara."
+            },
+            {
+                topic: "Managing Conversations",
+                q: "5. Which expression is used for ENDING a conversation?",
+                options: [
+                    "How's everything going?",
+                    "By the way, have you heard the news?",
+                    "It was nice talking to you, but I must get back to studying.",
+                    "Can you tell me more about your project?"
+                ],
+                answer: 2,
+                explanation: "'It was nice talking to you...' merupakan ungkapan penutup percakapan yang sopan."
+            },
+            {
+                topic: "Subject Questions",
+                q: "6. Change into a Subject Question: '<strong>Cyberbullying</strong> affects students' mental health.'",
+                options: [
+                    "What does affect students' mental health?",
+                    "What affects students' mental health?",
+                    "What did affect students' mental health?",
+                    "Who affect students' mental health?"
+                ],
+                answer: 1,
+                explanation: "'What' menanyakan subjek benda/konsep ('Cyberbullying'), sehingga langsung diikuti Verb+s ('affects') tanpa auxiliary 'does'."
+            },
+            {
+                topic: "Subject Questions",
+                q: "7. '_____ organized the Digital Safety Workshop at our school last week?'",
+                options: [
+                    "Who did organize",
+                    "Who does organize",
+                    "Who organized",
+                    "Whom did organize"
+                ],
+                answer: 2,
+                explanation: "Keterangan waktu 'last week' menunjukkan Past Tense. Karena 'Who' adalah subjek pelaku, langsung gunakan Verb 2 ('organized')."
+            },
+            {
+                topic: "Vocabulary: Digital Footprint",
+                q: "8. The permanent trail of data you leave behind when using the internet is called a _____.",
+                options: [
+                    "cyberbullying",
+                    "digital footprint",
+                    "permission",
+                    "social caption"
+                ],
+                answer: 1,
+                explanation: "Digital footprint adalah rekam jejak data permanen yang ditinggalkan pengguna saat beraktivitas di internet."
+            },
+            {
+                topic: "Vocabulary: Netiquette",
+                q: "9. Asking your friend before tagging them in a photo shows that you respect their _____.",
+                options: [
+                    "privacy",
+                    "inappropriate",
+                    "rumor",
+                    "scam"
+                ],
+                answer: 0,
+                explanation: "Meminta izin sebelum mengunggah/menandai foto orang lain adalah bentuk menghormati privasi (privacy) dalam etika digital."
+            },
+            {
+                topic: "Writing Caption & Bio",
+                q: "10. Which of the following is the BEST example of a safe and positive social media bio for a high school student?",
+                options: [
+                    "Call me at 0812-XXXX-XXXX | Living at Jl. Merdeka No. 10.",
+                    "I hate school and everyone here is annoying.",
+                    "Grade 11 Science Student | Photography Lover | Spreading good vibes ✨",
+                    "Password123 | Private life don't follow."
+                ],
+                answer: 2,
+                explanation: "Pilihan C menampilkan identitas pelajar, minat positif (fotografi), serta tidak membocorkan informasi pribadi sensitif seperti alamat rumah atau nomor HP."
+            }
+        ];
+
+        const userExamAnswers = {};
+
+        function renderFinalExam() {
+            const container = document.getElementById('final-exam-container');
+            container.innerHTML = '';
+
+            finalExamData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.id = `exam-q-${idx}`;
+                card.className = "bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-3";
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold">${item.topic}</span>
+                        <span class="text-xs text-slate-400 font-semibold">10 Poin</span>
+                    </div>
+                    <p class="font-semibold text-slate-800 text-sm sm:text-base whitespace-pre-line">${item.q}</p>
+                    <div class="grid grid-cols-1 gap-2 pt-1" id="exam-opts-${idx}">
+                        ${item.options.map((opt, oIdx) => `
+                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition text-xs sm:text-sm">
+                                <input type="radio" name="exam_q_${idx}" value="${oIdx}" onchange="userExamAnswers[${idx}] = ${oIdx}" class="w-4 h-4 text-indigo-600">
+                                <span><strong>${String.fromCharCode(65 + oIdx)}.</strong> ${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="exam-exp-${idx}" class="hidden p-3.5 rounded-xl text-xs sm:text-sm mt-2"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function submitFinalExam() {
+            let score = 0;
+            finalExamData.forEach((item, idx) => {
+                const chosen = userExamAnswers[idx];
+                const expBox = document.getElementById(`exam-exp-${idx}`);
+                const card = document.getElementById(`exam-q-${idx}`);
+                
+                expBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+                card.classList.remove('border-emerald-400', 'border-rose-400');
+
+                if (chosen === item.answer) {
+                    score += 10;
+                    card.classList.add('border-emerald-400');
+                    expBox.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+                    expBox.innerHTML = `<strong><i class="fa-solid fa-circle-check text-emerald-600"></i> Benar (+10 Poin)!</strong><br>${item.explanation}`;
+                } else {
+                    card.classList.add('border-rose-400');
+                    expBox.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+                    const correctLetter = String.fromCharCode(65 + item.answer);
+                    expBox.innerHTML = `<strong><i class="fa-solid fa-circle-xmark text-rose-600"></i> Kurang Tepat. Kunci Jawaban: ${correctLetter}</strong><br>${item.explanation}`;
+                }
+            });
+
+            // Display Result Card
+            const resultCard = document.getElementById('exam-result-card');
+            const scoreNum = document.getElementById('exam-score-number');
+            const gradeTitle = document.getElementById('exam-grade-title');
+            const feedbackMsg = document.getElementById('exam-feedback-msg');
+
+            scoreNum.textContent = score;
+            if (score >= 80) {
+                gradeTitle.textContent = "Excellent Work! (Sangat Memuaskan)";
+                feedbackMsg.textContent = "Kamu telah menguasai konsep literasi digital, ungkapan berpendapat, percakapan, dan Subject Questions dengan sangat baik!";
+            } else if (score >= 60) {
+                gradeTitle.textContent = "Good Job! (Cukup Baik)";
+                feedbackMsg.textContent = "Pemahamanmu sudah baik. Pelajari kembali pembahasan pada nomor yang masih keliru untuk menyempurnakan hasilmu.";
+            } else {
+                gradeTitle.textContent = "Keep Practicing! (Terus Berlatih)";
+                feedbackMsg.textContent = "Jangan menyerah! Silakan tinjau kembali ringkasan materi di Unit 1–5 lalu coba kerjakan evaluasi ini kembali.";
+            }
+
+            resultCard.classList.remove('hidden');
+            markComplete('evaluation');
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetFinalExam() {
+            Object.keys(userExamAnswers).forEach(k => delete userExamAnswers[k]);
+            document.getElementById('exam-result-card').classList.add('hidden');
+            renderFinalExam();
+        }
+
+        // Initialize Components on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderUnitQuizzes();
+            renderFinalExam();
+        });
+    </script>
+</body>
+</html>
